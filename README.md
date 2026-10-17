@@ -312,6 +312,30 @@ export SEARCH_KEYS_BRAVE=your-key
 
 Precedence (highest first): `<PROVIDER>_API_KEY` env → `SEARCH_KEYS_*` env → config file.
 
+### Using Parallel
+
+Get a [Parallel API key](https://platform.parallel.ai/) and expose it as
+`PARALLEL_API_KEY` (or `SEARCH_KEYS_PARALLEL`). To save the key in the config
+file instead, pass it through stdin:
+
+```bash
+echo "$PARALLEL_API_KEY" | search config set keys.parallel -
+search config check
+search search -q "Rust async programming guide" -p parallel --json
+```
+
+`config check` reports whether a key is set; it does not contact the API or
+validate the key. The search command selects only Parallel and returns the
+standard JSON result envelope, including titles, URLs, and excerpts in
+`results[].snippet`. API access requires a valid key; this provider uses the
+[Parallel Search API](https://docs.parallel.ai/search/search-quickstart), not
+the anonymous Search MCP endpoint.
+
+Without `-p`, configured Parallel participates in the `general`, `news`, and
+`deep` mode provider sets. These CLI modes all use Parallel's `fast` API mode;
+`deep` controls the CLI's multi-provider coverage, not Parallel's API mode.
+See [config.example.toml](config.example.toml) for the config-file layout.
+
 ## Signing in to metasearch.sh
 
 [metasearch.sh](https://metasearch.sh) is the hosted sibling: one prepaid

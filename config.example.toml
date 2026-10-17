@@ -1,9 +1,10 @@
 # search-cli configuration
 # Place at ~/.config/search/config.toml
-# All keys can also be set via env vars with SEARCH_ prefix
-# e.g. SEARCH_BRAVE_KEY, SEARCH_SERPER_KEY
+# All keys can also be set via env vars with SEARCH_KEYS_ prefix
+# e.g. SEARCH_KEYS_PARALLEL, SEARCH_KEYS_BRAVE, SEARCH_KEYS_SERPER
 
 [keys]
+parallel = ""
 brave = ""
 serper = ""
 exa = ""
